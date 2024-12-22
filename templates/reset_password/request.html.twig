@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Réinitialiser le mot de passe</h1>
+    <form method="post" action="{{ path('app_forgot_password_request') }}">
+        <div>
+            <label for="email">Entrez votre adresse email :</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <button type="submit">Envoyer le lien de réinitialisation</button>
+    </form>
+{% endblock %}

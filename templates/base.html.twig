@@ -12,6 +12,24 @@
         {% endblock %}
     </head>
     <body>
+        <nav>
+            {% if app.user %}
+                <p>Bienvenue, {{ app.user.firstName }} {{ app.user.lastName }} !</p>
+                {% if 'ROLE_ADMIN' in app.user.roles %}
+                    <a href="{{ path('admin_dashboard') }}">Dashboard Admin</a>
+                {% endif %}
+                {% if 'ROLE_USER' in app.user.roles %}
+                    <a href="{{ path('app_profile') }}">Mon Profil</a>
+                {% endif %}
+                {% if 'ROLE_BANNED' in app.user.roles %}
+                    <p style="color: red;">Votre compte est restreint. Contactez le support.</p>
+                {% endif %}
+                <a href="{{ path('app_logout') }}">Déconnexion</a>
+            {% else %}
+                <a href="{{ path('app_login') }}">Connexion</a>
+            {% endif %}
+        </nav>
+
         {% block body %}{% endblock %}
     </body>
 </html>

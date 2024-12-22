@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Bienvenue dans votre espace profil</h1>
+
+    <p>Bonjour {{ user.firstName }} {{ user.lastName }} !</p>
+    <p>Votre email : {{ user.email }}</p>
+    <a href="{{ path('app_logout') }}">Se déconnecter</a>
+{% endblock %}
