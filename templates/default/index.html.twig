@@ -1,16 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Page d'accueil{% endblock %}
+{% block title %}Accueil - Tutoriels{% endblock %}
 
 {% block body %}
-<div class="example-wrapper">
-    <h1>Bienvenue sur mon projet Symfony ! 🎉</h1>
-
-    <p>Ceci est la page d’accueil de votre projet. Utilisez-la pour introduire votre application ou diriger les utilisateurs vers les sections principales.</p>
-
-    <ul>
-        <li><a href="/about">À propos</a></li>
-        <li><a href="/contact">Contactez-nous</a></li>
-    </ul>
-</div>
+    <div style="text-align: center; margin-top: 50px;">
+        <h1>Bienvenue sur notre plateforme de Tutoriels ! 🎓</h1>
+        <p>Découvrez une collection de tutoriels pour apprendre et progresser.</p>
+        {% if app.user %}
+            <p>Bonjour, {{ app.user.firstName }} {{ app.user.lastName }} !</p>
+            <a href="{{ path('app_profile') }}" style="margin: 10px; padding: 10px; background-color: #4CAF50; color: white; text-decoration: none;">Accéder à mon profil</a>
+        {% else %}
+            <a href="{{ path('app_login') }}" style="margin: 10px; padding: 10px; background-color: #008CBA; color: white; text-decoration: none;">Se connecter</a>
+            <a href="{{ path('app_register') }}" style="margin: 10px; padding: 10px; background-color: #f0ad4e; color: white; text-decoration: none;">Créer un compte</a>
+        {% endif %}
+    </div>
 {% endblock %}

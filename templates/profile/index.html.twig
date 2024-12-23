@@ -1,9 +1,104 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Bienvenue dans votre espace profil</h1>
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
 
-    <p>Bonjour {{ user.firstName }} {{ user.lastName }} !</p>
-    <p>Votre email : {{ user.email }}</p>
-    <a href="{{ path('app_logout') }}">Se déconnecter</a>
+        .main-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .profile-content {
+            flex: 3;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .profile-content h1 {
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .profile-content p {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .logout-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: white;
+            background-color: #dc3545;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .logout-link:hover {
+            background-color: #a71d2a;
+        }
+
+        .sidebar {
+            flex: 1;
+            background-color: #007bff;
+            padding: 20px;
+            color: white;
+        }
+
+        .sidebar h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #0056b3;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #003f88;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="main-container">
+        <!-- Contenu principal -->
+        <div class="profile-content">
+            <h1>Bienvenue dans votre espace profil</h1>
+            <p>Bonjour {{ user.firstName }} {{ user.lastName }} !</p>
+            <p>Votre email : {{ user.email }}</p>
+            <a class="logout-link" href="{{ path('app_logout') }}">Se déconnecter</a>
+        </div>
+
+        <!-- Barre latérale -->
+        <aside class="sidebar">
+            <h2>Gestion des entités</h2>
+            <a href="{{ path('app_matiere_index') }}">Gérer les Matières</a>
+            <a href="{{ path('app_tutoriel_index') }}">Gérer les Tutoriels</a>
+            <a href="{{ path('app_chapitre_index') }}">Gérer les Chapitres</a>
+            <a href="{{ path('app_commentaire_index') }}">Gérer les Commentaires</a>
+        </aside>
+    </div>
 {% endblock %}

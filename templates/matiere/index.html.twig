@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Matières{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Gestion des Matières</h1>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Liste des Matières</h3>
+        <a href="{{ path('app_matiere_new') }}" class="btn btn-success">Créer une nouvelle matière</a>
+    </div>
+
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for matiere in matieres %}
+            <tr>
+                <td>{{ matiere.id }}</td>
+                <td>{{ matiere.nom }}</td>
+                <td>{{ matiere.description }}</td>
+                <td>
+                    <a href="{{ path('app_matiere_show', {'id': matiere.id}) }}" class="btn btn-info btn-sm">Afficher</a>
+                    <a href="{{ path('app_matiere_edit', {'id': matiere.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                    <form method="post" action="{{ path('app_matiere_delete', {'id': matiere.id}) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette matière ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ matiere.id) }}">
+                        <button class="btn btn-danger btn-sm">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4" class="text-center">Aucune matière trouvée.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: #333;
+}
+
+a {
+  transition: background-color 0.3s;
+}
+
+a:hover {
+  background-color: #0056b3;
+}
+fieldset {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+legend {
+  font-weight: bold;
+  color: #333;
+}
+
+.roles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.roles label {
+  margin-left: 0.5rem;
+  color: #555;
+}
+
+.roles input[type="checkbox"] {
+  margin-right: 0.5rem;
+}

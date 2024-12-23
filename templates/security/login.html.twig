@@ -1,32 +1,108 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f4f8;
+        }
+
+        .login-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-card h1 {
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            color: #333;
+            text-align: center;
+        }
+
+        .login-card label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: bold;
+        }
+
+        .login-card input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .login-card button {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .login-card button:hover {
+            background-color: #0056b3;
+        }
+
+        .forgot-password {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .forgot-password a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
-    <h1>Connexion</h1>
-    <form method="post" action="{{ path('app_login') }}">
-        {% if error %}
-            <div style="color: red;">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+    <div class="login-container">
+        <div class="login-card">
+            <h1>Connexion</h1>
+            <form method="post" action="{{ path('app_login') }}">
+                {% if error %}
+                    <div style="color: red;">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
 
-        {% if app.user %}
-            <div>
-                Vous êtes connecté en tant que {{ app.user.email }}.
-                <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                {% if app.user %}
+                    <div>
+                        Vous êtes connecté en tant que {{ app.user.email }}.
+                        <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                    </div>
+                {% else %}
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <label for="inputEmail">Email :</label>
+                    <input type="email" name="_username" id="inputEmail" required autofocus>
+
+                    <label for="inputPassword">Mot de passe :</label>
+                    <input type="password" name="_password" id="inputPassword" required>
+
+                    <button type="submit">Se connecter</button>
+                {% endif %}
+            </form>
+            <div class="forgot-password">
+                <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
             </div>
-        {% else %}
-            <div>
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                <label for="inputEmail">Email :</label>
-                <input type="email" name="_username" id="inputEmail" required autofocus>
-
-                <label for="inputPassword">Mot de passe :</label>
-                <input type="password" name="_password" id="inputPassword" required>
-
-
-                <button type="submit">Se connecter</button>
-            </div>
-            <p>
-    <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
-</p>
-        {% endif %}
-    </form>
+        </div>
+    </div>
 {% endblock %}
