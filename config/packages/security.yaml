@@ -41,6 +41,8 @@ security:
     - { path: ^/tutoriel, roles: ROLE_ADMIN }
     - { path: ^/chapitre, roles: ROLE_ADMIN }
     - { path: ^/commentaire, roles: ROLE_ADMIN }
+    - { path: ^/commentaire, roles: ROLE_ADMIN }
+
 
 when@test:
   security:

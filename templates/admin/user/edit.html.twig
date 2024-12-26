@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier l'utilisateur{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Modifier l'utilisateur</h1>
+
+    <p><strong>Email de l'utilisateur :</strong> {{ user.email }}</p>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-success">Mettre à jour</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('user_index') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+</div>
+{% endblock %}
